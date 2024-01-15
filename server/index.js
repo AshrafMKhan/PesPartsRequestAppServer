@@ -53,6 +53,17 @@ app.get('/deleteFile',(req, res) => {
   }
 });
 
+app.get('/renameFile', (req, res) => {
+  const currentFileName = req.query.currentFileName;
+  const newFileName = req.query.newFileName;
+  
+  fs.rename('./client/public/saved_parts_lists/' + currentFileName, './client/public/saved_parts_lists/' + newFileName, () => {
+    res.send('renamed file')
+  });
+  
+  
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });
