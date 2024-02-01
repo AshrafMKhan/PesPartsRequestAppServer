@@ -8,16 +8,16 @@ app.post('/savePartsList', (req, res) => {
   console.log(JSON.stringify(req.body));
   const newPartsList = req.body;
   const partsListName = req.query.fileName;
-  
+  const dirPath = req.query.path;
   try {
-    fs.unlinkSync('./client/public/saved_parts_lists/' + partsListName);
+    fs.unlinkSync('./client/public/' + dirPath + partsListName);
     console.log('File is deleted.');
   } catch (err) {
     console.error(err);
   }
   
   
-  fs.writeFile('./client/public/saved_parts_lists/' + partsListName, JSON.stringify(newPartsList,null,2), err => {
+  fs.writeFile('./client/public/' + dirPath + partsListName, JSON.stringify(newPartsList,null,2), err => {
     if (err) {
       console.error(err);
       res.send('error');
